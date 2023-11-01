@@ -4,18 +4,15 @@ let circles = [];
 
 function preload(){
   data = loadTable(url,'csv', 'header'); //3er parameter allows the header
-  img = loadImage('crayola.png');
 }
 
 function setup() {
   createCanvas(windowWidth, 600);
   print(data);
 
-
   for (let i = 0; i < data.getRowCount(); i++) {
-    let x = random(25, width-100);
-    let y = random(50, height-50);
-
+    let x = random(80, width-80);
+    let y = random(80, height-80);
     
     let colorName = data.getString(i,"color");
     let hex = data.getString (i, "hex");
@@ -36,16 +33,12 @@ function draw() {
     constructor(x, y, colorName, hex){
       this.x = x;
       this.y = y;
-      this.radius = 60;
-      this.w = 124;
-      this.h = 35;
+      this.radius = 80;
       this.colorName = colorName;
       this.hex = hex;
       this.dragging = false;
       this.offsetX = 0;
       this.offsetY = 0;
-
-      
     }
 
   update(){
@@ -57,42 +50,32 @@ function draw() {
 
 
   display(){
-    
     if (this.dragging) {
-    noStroke();
-    
     fill(255);
-    ellipse(this.x+6, this.y+8, this.radius, 20);
-    ellipse(this.x+10, this.y+8, this.radius, 28);
-    rect(this.x, this.y-10, this.w, this.h);
-    fill(this.hex);
-    image(img, this.x-26, this.y-12, 150, 40);
-    textAlign(LEFT, TOP);
-    textSize(10);
-    text(this.colorName, this.x+10, this.y+3);
-
-  } else { 
+    stroke(0);
+    ellipse(this.x, this.y, this.radius);
     noStroke();
     fill(this.hex);
-    ellipse(this.x+6, this.y+8, this.radius, 20);
-    ellipse(this.x+10, this.y+8, this.radius, 28);
-    rect(this.x, this.y-10, this.w, this.h);
-    fill(0);
-    image(img, this.x-26, this.y-12, 150, 40);
-    textAlign(LEFT, TOP);
+    textAlign(CENTER, CENTER);
     textSize(10);
-    text(this.colorName, this.x+10, this.y+3);
+    text(this.colorName, this.x, this.y); 
+  } else {
+    fill(this.hex);
+    stroke(0);
+    ellipse(this.x, this.y, this.radius);
+    noStroke();
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    text(this.colorName, this.x, this.y); 
   }
 }
 
 
   isOver() {
-    if(mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
-      return true; 
-  } else {
-      return false; 
-  }
-   
+    let d = dist(mouseX, mouseY, this.x, this.y);
+    return d < this.radius-50;
+
   }
 
   mousePressed() {

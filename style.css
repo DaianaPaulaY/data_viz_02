@@ -1,8 +1,44 @@
 html, body {
   margin: 0;
   padding: 0;
+  color:black;
+  background-color:white;
+
 }
 
 canvas {
+  margin:auto;
   display: block;
+}
+
+h1, h2, p{
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+h2{
+  margin-top: -15px;
+  color:darkgray;
+}
+
+p{
+  font-size: small;
+  line-height: 20px;
+}
+
+a {
+  color: #FF7F49;
+}
+
+
+.border{
+  padding-bottom: 30px;
+  border-bottom: 2px solid rgb(235,235,235);
+  width: 400px;
+  margin: auto;
+}
+
+
+.margin-top-0{
+  margin-top: 0!important;
 }
